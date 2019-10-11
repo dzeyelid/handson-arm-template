@@ -31,6 +31,23 @@
 
 ## セルフペース ハンズオン
 
+### 0. ハンズオン概要
+
+ハンズオンでは、ARM Template によりStorage Account (Blob) と連携する Node.js アプリを Azure リソースとともにデプロイします。
+
+![Structure](./docs/images/readme_010.png)
+
+今回ハンズオンでは下記を実施します。
+
+- App Service Plan とそのうえで実行される Azure Function (Linux) のプロビジョニング
+- 二つの Azure Storage のプロビジョニング
+- GitHub から Azure Functions に Node.js アプリをデプロイし、Azure Storage と連携
+
+また、デプロイするアプリは、下記の機能を有しています。
+
+- ユーザーから REST でリクエストを受けたら、リクエストごとに Storage Account (Blob) にデータを書き込む。
+    - 書き込む内容は、HTTP クエリ文字列や POST のリクエストボディにて指定する。
+
 大まかな手順は下記のとおりです。
 
 1. Azureポータルから、ベースとなる ARMテンプレートをダウンロードする
