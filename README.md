@@ -57,7 +57,7 @@
 
 - デプロイする Node.js アプリのパス : https://github.com/dzeyelid/handson-arm-template/blob/develop/functions.zip?raw=true
 - Node のバージョン : 10.14.1
-- リソースグループの名前 : 皆さんのアカウント名 (例 kysaitou@tech.softbank.co.jp なら ***kysaitou***)
+- リソースグループの名前 : 皆さんのメールアドレスのアカウント名 (例 hans-schmidt@contoso.com なら ***hans-schmidt***)
 - ストレージアカウントの名前 :
-    - 皆さんのアカウント名+sa  (例 kysaitou@tech.softbank.co.jp なら ***kysaitousa***)
-    - 皆さんのアカウント名+logsa  (例 kysaitou@tech.softbank.co.jp なら ***kysaitoulogsa***)
+    - 皆さんのメールアドレスのアカウント名+sa  (例 hans-schmidt@contoso.com なら ***hansschmidtsa***)
+    - 皆さんのメールアドレスのアカウント名+logsa  (例 hans-schmidt@contoso.com なら ***hansschmidtlogsa***)
