@@ -8,6 +8,8 @@
 
 ## ARMテンプレートについて
 
+_(加筆予定)_
+
 ## 環境準備
 
 本ハンズオンに取り組むにあたり、下記の環境をご準備ください。 **\*** は必須です。
@@ -25,7 +27,7 @@
 |----|----|
 | Azure CLI | こちら [Azure CLI のインストール - Microsoft Docs](https://docs.microsoft.com/ja-jp/cli/azure/install-azure-cli?view=azure-cli-latest) を参考にインストールしてください。 |
 | Visual Studio Code | 下記の拡張機能と組み合わせると ARMテンプレートの編集がとても楽になるので、おすすめしています。お持ちでない方は、こちら [Download Visual Studio Code - Mac, Linux, Windows](https://code.visualstudio.com/Download) からインストールしてください。 |
-| Visual Studio Code 拡張機能「Azure Resource Manager Tools」 | https://marketplace.visualstudio.com/items?itemName=msazurermtools.azurerm-vscode-tools |
+| Visual Studio Code 拡張機能「Azure Resource Manager Tools」 | Visual Studio Code で ARMテンプレートを編集する際にとても便利です。Visual Studio Code 上で拡張機能を検索するか、こちら [Azure Resource Manager Tools - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=msazurermtools.azurerm-vscode-tools) からインストールしてください。 |
 
 また、本手順は、 [Azure Cloud shell](https://docs.microsoft.com/ja-jp/azure/cloud-shell/overview) でも実施することができます。Cloud shell には、Azure CLI や Visual Studio Code ベースのエディタがすでに組み込まれています。また、ファイルをアップロードすることもできます。ファイルアップロードに関しては、こちら [Cloud Shell にローカル ファイルを転送する | Microsoft Docs](https://docs.microsoft.com/ja-jp/azure/cloud-shell/persisting-shell-storage#transfer-local-files-to-cloud-shell) をご参照ください。
 
@@ -33,31 +35,27 @@
 
 ### ハンズオン概要
 
-ハンズオンでは、ARM Template によりStorage Account (Blob) と連携する Node.js アプリを Azure リソースとともにデプロイします。
+ハンズオンでは、ARMテンプレートを用いて、ストレージアカウント (Blob) と連携する Azure Functions をデプロイします。
 
 ![Structure](./docs/images/readme_010.png)
 
-今回ハンズオンでは下記を実施します。
+デプロイされる構成は、下記の機能を有しています。
 
-- App Service Plan とそのうえで実行される Azure Function (Linux) のプロビジョニング
-- 二つの Azure Storage のプロビジョニング
-- GitHub から Azure Functions に Node.js アプリをデプロイし、Azure Storage と連携
+- ユーザーから REST でリクエストを受けたら、リクエストごとにストレージアカウント (Blob) にファイルを書き込む
+  - 書き込む内容は、HTTP クエリ文字列や POST のリクエストボディにて指定する
 
-また、デプロイするアプリは、下記の機能を有しています。
+#### デプロイするリソース
 
-- ユーザーから REST でリクエストを受けたら、リクエストごとに Storage Account (Blob) にデータを書き込む。
-    - 書き込む内容は、HTTP クエリ文字列や POST のリクエストボディにて指定する。
+| リソース | 説明 |
+|----|----|
+| Azure Functions | ソースコードは、 Node.js で記述する |
+| App Service Plan | Azure Functions に付随する。ソースコードを Node.js で記述したいので、より適した Linux 環境を採用する |
+| Storage Accounts | Azure Functions に付随する。 |
+| Application Insights | Azure Functions に付随する。（必須ではないが、モニタリングのため不可欠） |
+| Storage Accounts (ログ出力用) | Functions のサンプルコードから使用するストレージ |
 
-ハンズオンは、レベルに応じて 2 パターンのいずれかの方法で進めていきます。
+#### 進め方
 
-- ARM Template を初めて触る方 : [模範解答](./docs/SampleAnswer.md) に沿ってデプロイの実施
-- ARM Template ガチ勢 : 自分で作り方を考えてデプロイにチャレンジし、[模範解答](./docs/SampleAnswer.md) と答え合わせ
+初めて ARMテンプレートを体験する方は、こちらの[解答例](./docs/selfpaced-handson.md) を参考に進めてください。ARMテンプレートを一から作るのではなく、Azureポータルでベースとなる ARMテンプレートを生成し、必要な部分を追記していく流れで進めます。
 
-### ハンズオンで必要情報
-
-- デプロイする Node.js アプリのパス : https://github.com/dzeyelid/handson-arm-template/blob/develop/functions.zip?raw=true
-- Node のバージョン : 10.14.1
-- リソースグループの名前 : 皆さんのメールアドレスのアカウント名 (例 hans-schmidt@contoso.com なら ***hans-schmidt***)
-- ストレージアカウントの名前 :
-    - 皆さんのメールアドレスのアカウント名+sa  (例 hans-schmidt@contoso.com なら ***hansschmidtsa***)
-    - 皆さんのメールアドレスのアカウント名+logsa  (例 hans-schmidt@contoso.com なら ***hansschmidtlogsa***)
+また、腕に自信のある方は [Azure Resource Manager テンプレートリファレンス - Azure template | Microsoft Docs](https://docs.microsoft.com/en-us/azure/templates/) などを参考に自力でテンプレート作成にチャレンジしてみましょう！ :muscle: 解答例では簡略化のためにAzureポータルで出力したテンプレートを使用していますが、必ずしもスマートではない（APIバージョンが古い、など）ため、慣れるにつ淹れて自力で書くようになると思います♪
