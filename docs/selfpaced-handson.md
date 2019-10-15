@@ -207,17 +207,24 @@ Node.js のバージョンを指定するには、 Application settings の `WEB
 
 ##### Run from package でソースコードをデプロイさせる
 
-Application settings に `WEBSITE_RUN_FROM_PACKAGE` を設定すると、 _Run from package_ というパッケージからコードを実行できる機能を指定できます。値に zip ファイルのURLを指定することで zip に含まれたソースコードをデプロイすることができます。
+Application settings に `WEBSITE_RUN_FROM_PACKAGE` を設定すると、 _Run from package_ というパッケージからコードを実行できる機能を指定できます。この `WEBSITE_RUN_FROM_PACKAGE` の値に zip ファイルのURLを指定すると、その zip ファイルに含まれたコードをデプロイすることができます。
 
 - 参考: [Azure Functions をパッケージから実行する | Microsoft Docs](https://docs.microsoft.com/ja-jp/azure/azure-functions/run-functions-from-deployment-package#enabling-functions-to-run-from-a-package)
 
 この手順では、このリポジトリでホストしている zip アーカイブされたソースコードを指定しています。
 
-##### ストレージアカウントの接続文字列を設定する
+##### Blobバインディングの接続文字列を設定する
 
-ストレージアカウントが使用する
+Azure Functions にはバインディングという機能があり、他のリソースと連携させることができます。今回利用するのはストレージアカウントの blob へ出力するバインディングです。
 
-https://docs.microsoft.com/ja-jp/azure/azure-resource-manager/resource-group-template-functions
+blob バインディングでは、ストレージアカウントへの接続を確立するために、 Application Settings に設定された接続文字列を参照します。今回のハンズオンでは ARMテンプレートの中でこれを行います。
+
+ちなみに、Azure Functions のバインディングの設定は、コード群の中にある _function.json_ に記述します。詳細は [Azure Functions における Azure Blob Storage のバインド | Microsoft Docs](https://docs.microsoft.com/ja-jp/azure/azure-functions/functions-bindings-storage-blob?tabs=javascript#output) をご参照ください。
+
+また、Application Settings に設定するストレージアカウントの接続文字列については、前述のテンプレート関数の `concat()` や `listKey()` を用いて作成しています。
+
+- 参考: `concat()` [Azure Resource Manager テンプレートの関数 - 文字列 | Microsoft Docs](https://docs.microsoft.com/ja-jp/azure/azure-resource-manager/resource-group-template-functions-string#concat)
+- 参考：`listKey()` [Azure Resource Manager テンプレートの関数 - リソース | Microsoft Docs](https://docs.microsoft.com/ja-jp/azure/azure-resource-manager/resource-group-template-functions-resource#listkeys)
 
 ## 3. ARMテンプレートを使ってリソースをデプロイする
 
@@ -252,4 +259,19 @@ az group deployment create ^
 
 ## 4. 動作確認を行う
 
-Azure Functions に HttpTrigger という関数がデプロイされているので、これを実行すると、追加した方のストレージアカウントの logs コンテナにログが出力されます。この動作が確認できればデプロイ成功です。
+Azure Functions に HttpTrigger という関数がデプロイされているので、これを実行します。ポータルから行う場合は、下図をご参考ください。
+
+Azureポータルで当該の Azure Functions を開き、Functions から「HttpTrigger」を開きます。「Run」ボタンを選択します。
+![Run a function on Azure portal](./images/run-function-on-portal.png)
+
+画面の右にスクロールした先に、リクエストを送信できる画面が開きます。赤枠のように POST を指定し、body に `{"name": "you"}` などを指定し、「Run」ボタンをクリックして、リクエストを送信します。
+![Send post request to the function on Azure portal](./images/post-to-function-on-portal.png)
+
+すると、追加した方のストレージアカウントの logs コンテナにログが出力されます。
+
+![Open containers panel on storage account](./images/open-containers-on-storage-account.png)
+![Open logs container on storage account](./images/open-logs-container-on-storage-account.png)
+![Open a log in the logs container](./images/open-a-log-in-blob-container.png)
+![See the content of log](./images/see-the-content-of-log.png)
+
+この動作が確認できればデプロイ成功です:raised_hands:
