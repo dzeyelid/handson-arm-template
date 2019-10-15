@@ -37,7 +37,7 @@ _(加筆予定)_
 
 ハンズオンでは、ARMテンプレートを用いて、ストレージアカウント (Blob) と連携する Azure Functions をデプロイします。
 
-![Structure](./docs/images/readme_010.png)
+![Structure](./docs/images/structure-overview.png)
 
 デプロイされる構成は、下記の機能を有しています。
 
@@ -58,4 +58,4 @@ _(加筆予定)_
 
 初めて ARMテンプレートを体験する方は、こちらの[解答例](./docs/selfpaced-handson.md) を参考に進めてください。ARMテンプレートを一から作るのではなく、Azureポータルでベースとなる ARMテンプレートを生成し、必要な部分を追記していく流れで進めます。
 
-また、腕に自信のある方は [Azure Resource Manager テンプレートリファレンス - Azure template | Microsoft Docs](https://docs.microsoft.com/en-us/azure/templates/) などを参考に自力でテンプレート作成にチャレンジしてみましょう！ :muscle: 解答例では簡略化のためにAzureポータルで出力したテンプレートを使用していますが、必ずしもスマートではない（APIバージョンが古い、など）ため、慣れるにつ淹れて自力で書くようになると思います♪
+また、腕に自信のある方は [Azure Resource Manager テンプレートリファレンス - Azure template | Microsoft Docs](https://docs.microsoft.com/en-us/azure/templates/) などを参考に自力でテンプレート作成にチャレンジしてみましょう :muscle: 解答例では簡略化のためにAzureポータルで出力したテンプレートを使用していますが、必ずしもスマートではない（APIバージョンが古い、など）ため、慣れるにつ淹れて自力で書くようになると思います♪

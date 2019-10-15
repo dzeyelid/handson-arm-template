@@ -11,15 +11,15 @@
 
 [Azureポータル](https://portal.azure.com) で、左メニューの「 + Create a resource」を選択し、リソースの新規作成を開きます。
 
-![Create a resource](./images/readme_001.png)
+![Create a resource](./images/create-a-resource.png)
 
 検索欄で、 `Function App` と入力し、候補の「Function App」を選択します。
 
-![Find Function App](./images/readme_002.png)
+![Find Function App](./images/find-function-app.png)
 
 Function App の「Create」ボタンを選択します。
 
-![Create Function App](./images/readme_003.png)
+![Create Function App](./images/create-function-app.png)
 
 Function App 作成画面の Basics タブで各項目を入力し、「Next: Hosting >」を選択します。
 
@@ -32,11 +32,11 @@ Function App 作成画面の Basics タブで各項目を入力し、「Next: Ho
 | Runtime stack | 「Node.js」を選択する |
 | Region | 「Japan East」を選択する |
 
-![Input basics parameters for new Function App](./images/readme_004.png)
+![Input basics parameters for new Function App](./images/input-basics-parameters-for-new-function-app.png)
 
 もし、上図の画面と異なる場合は、下図のような案内から new experience を開いてください。(資料作成時点で Azureポータルが移行期間中であるための差異です。)
 
-![Apply new experience](./images/readme_005.png)
+![Apply new experience](./images/apply-new-experience.png)
 
 Hosting タブで各項目を入力し、「Next: Monitoring >」を選択します。
 
@@ -48,7 +48,7 @@ Hosting タブで各項目を入力し、「Next: Monitoring >」を選択しま
 | Linux Plan (Japan East) | 「Create new」から Service plan の名前を入力する |
 | Sku and size | 「Change size」を選択し、Dev/Test タブから B1 を選択し、「Apply」を選択する (OS が Linux の場合は B1 以上を選択する必要がある) |
 
-![Input hosting parameters for new Function App](./images/readme_006.png)
+![Input hosting parameters for new Function App](./images/input-hosting-parameters-for-new-function-app.png)
 
 Monitoring タブで各項目を入力し、「Review + create」を選択します。
 
@@ -57,15 +57,15 @@ Monitoring タブで各項目を入力し、「Review + create」を選択しま
 | Enable Application Insights | 「Yes」を選択する |
 | Application Insights | 「Create new」から Application Insights の名前を入力し、Location に「Japan East」を選択し、「OK」を選択する |
 
-![Input monitoring parameters for new Function App](./images/readme_007.png)
+![Input monitoring parameters for new Function App](./images/input-monitoring-parameters-for-new-function-app.png)
 
 入力したパラメータが表示されるので確認し、「 **Download a template for automation** 」を選択します。
 
-![Check parameters for new Function App and go to download the template](./images/readme_008.png)
+![Check parameters for new Function App and go to download the template](./images/check-parameters-for-new-function-app.png)
 
 「 **Download** 」を選択して、テンプレートをダウンロードします。
 
-![Download the template](./images/readme_009.png)
+![Download the template](./images/download-the-template.png)
 
 ## 2. ARMテンプレートを編集する
 
@@ -175,7 +175,7 @@ Azure FUnctions のリソース定義は `"type": "Microsoft.Web/sites"` と定�
 },
 {
   "name": "WEBSITE_RUN_FROM_PACKAGE",
-  "value": "https://github.com/dzeyelid/handson-arm-template/blob/develop/functions.zip?raw=true"
+  "value": "https://github.com/dzeyelid/handson-arm-template/blob/master/functions.zip?raw=true"
 },
 {
   "name": "StorageAccountConnStrLog",
@@ -200,6 +200,8 @@ Application settings に `WEBSITE_RUN_FROM_PACKAGE` を設定すると、 _Run f
 この手順では、このリポジトリでホストしている zip アーカイブされたソースコードを指定しています。
 
 ##### ストレージアカウントの接続文字列を設定する
+
+ストレージアカウントが使用する
 
 https://docs.microsoft.com/ja-jp/azure/azure-resource-manager/resource-group-template-functions
 
