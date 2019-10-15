@@ -8,7 +8,9 @@
 
 ## ARMテンプレートについて
 
-_(加筆予定)_
+下記資料をご参照ください。
+
+- [今日から始めるARMテンプレート](https://www.slideshare.net/dzeyelid/getting-started-for-arm-template)
 
 ## 環境準備
 
