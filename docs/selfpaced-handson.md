@@ -122,8 +122,6 @@ Monitoring タブで各項目を入力し、「Review + create」を選択しま
     }
   ]
 },
-{
-}
 ```
 
 そして、このストレージアカウントはふたつのパラメータを参照するように記述されています。このパラメータについて定義を追加しましょう。 `parameters` のオブジェクトに、下記を追加して下さい。（既存のパラメータ定義に `,` が続くように追加することにご注意ください。）
@@ -154,10 +152,26 @@ Monitoring タブで各項目を入力し、「Review + create」を選択しま
 
 #### 2-1. 解説
 
-ストレージアカウントを追加するために、 [Microsoft.Storage/storageAccounts 2019-04-01 - Azure template | Microsoft Docs](https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/2019-04-01/storageaccounts) を確認しましょう。
+##### ストレージアカウントの追加
 
-ストレージアカウント名等のパラメータを定義する
-リソースを追加する
+このストレージアカウントの定義は、 [Microsoft.Storage/storageAccounts 2019-04-01 - Azure template | Microsoft Docs](https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/2019-04-01/storageaccounts) に記載されています。
+
+また、 `resources` の中で `blobServices/containers` を定義していることもわかります。作成したストレージアカウントの中に blob ストレージのコンテナを作成させるための定義です。これは、子リソースとしてストレージアカウントの定義の内側に定義しています。場合によっては、このような入れ子の形にできない条件があり、その場合は親のリソースと並列に定義します。その際は `dependsOn` で依存関係の設定を忘れないようにしましょう。
+
+- 参考: [Azure Resource Manager テンプレートでの子リソースの名前と種類 | Microsoft Docs](https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/2019-04-01/storageaccounts/blobservices/containers)
+
+##### パラメータ定義
+
+追加した定義をよく見ると、リソース名やSKUなどを直書きするのではなく、パラメータを参照するように作られていることがわかると思います。このようにすれば、同じテンプレートを用いてパラメータを変えて同じ構成のリソースをデプロイできます。また、変数 (variables) やテンプレート関数（後述）と組み合わせることによって、より柔軟にテンプレートを記述することができます。
+
+- 参考: [Azure Resource Manager テンプレートのパラメーター | Microsoft Docs](https://docs.microsoft.com/ja-jp/azure/azure-resource-manager/template-parameters)
+- 参考: [Azure Resource Manager テンプレートの変数 | Microsoft Docs](https://docs.microsoft.com/ja-jp/azure/azure-resource-manager/template-variables)
+
+##### テンプレート関数
+
+追加した定義には、 `resourceGroup().location` や `resourceId()` というような関数が含まれています。これは、ARMテンプレートで利用できる関数です。リソースを参照したり、文字列を操作したり、条件で振り分けたりなどできて重宝します。リファレンスに一度目を通しておくとよいでしょう。
+
+- 参考: [リソース マネージャーのテンプレートの関数 | Microsoft Docs](https://docs.microsoft.com/ja-jp/azure/azure-resource-manager/resource-group-template-functions)
 
 #### 2-2. Azure Functions のアプリ設定 (Application settings) を更新する
 
