@@ -31,6 +31,22 @@
 | Visual Studio Code | 下記の拡張機能と組み合わせると ARMテンプレートの編集がとても楽になるので、おすすめしています。お持ちでない方は、こちら [Download Visual Studio Code - Mac, Linux, Windows](https://code.visualstudio.com/Download) からインストールしてください。 |
 | Visual Studio Code 拡張機能「Azure Resource Manager Tools」 | Visual Studio Code で ARMテンプレートを編集する際にとても便利です。Visual Studio Code 上で拡張機能を検索するか、こちら [Azure Resource Manager Tools - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=msazurermtools.azurerm-vscode-tools) からインストールしてください。 |
 
+Azure CLI をインストールが済みましたら、下記を参考に、利用するアカウントでログインし、サブスクリプションが選択されていることをご確認ください。
+
+```bash
+# 利用するAzureアカウントでログインする
+az login
+
+# ログインしたアカウントのサブスクリプションを確認する
+az account show
+
+# ※ もし意図しないサブスクリプションが表示された場合、下記を参考にサブスクリプションを差し替えて下さい。
+# - サブスクリプションの一覧を表示する
+az account list
+# - 利用するサブスクリプションIDを確認し、セットする
+az account set -s xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+```
+
 また、本手順は、 [Azure Cloud shell](https://docs.microsoft.com/ja-jp/azure/cloud-shell/overview) でも実施することができます。Cloud shell には、Azure CLI や Visual Studio Code ベースのエディタがすでに組み込まれています。また、ファイルをアップロードすることもできます。ファイルアップロードに関しては、こちら [Cloud Shell にローカル ファイルを転送する | Microsoft Docs](https://docs.microsoft.com/ja-jp/azure/cloud-shell/persisting-shell-storage#transfer-local-files-to-cloud-shell) をご参照ください。
 
 ## セルフペース ハンズオン
